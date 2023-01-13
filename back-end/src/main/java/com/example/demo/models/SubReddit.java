@@ -75,4 +75,8 @@ public class SubReddit {
     public void addPostToSubReddit(Post post){
         this.posts.add(post);
     }
+    public void addUser(User user){
+        this.users.add(user);
+    }
+
 }

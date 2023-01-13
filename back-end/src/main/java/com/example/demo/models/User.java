@@ -105,9 +105,7 @@ public class User {
         this.likedPosts = likedPosts;
     }
 
-    public void addPost(Post post){
-        this.posts.add(post);
-    }
+    public void addPost(Post post){this.posts.add(post);}
 
     public void likePost(Post post){
         this.likedPosts.add(post);

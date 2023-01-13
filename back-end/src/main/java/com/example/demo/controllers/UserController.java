@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.Post;
 import com.example.demo.models.User;
 import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,25 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> addNewUser(@RequestBody User user){
         User newUser = userService.addUser(user);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers(){
         List<User> users = userService.getAllUsers();
         return new ResponseEntity<>(users,HttpStatus.OK);
+    }
+
+    @PostMapping("/follow")
+    public ResponseEntity<User> followSubReddit(@RequestParam Long userId,@RequestParam Long subRedditId){
+        userService.followSubReddit(userId,subRedditId);
+        User targetUser = userService.getUserById(userId).get();
+        return new ResponseEntity<>(targetUser,HttpStatus.OK);
+    }
+
+    @PostMapping("/post")
+    public ResponseEntity<User> post(@RequestBody Post post,@RequestParam Long userId,@RequestParam Long subRedditId){
+        User targetUser =  userService.addPost(userId,subRedditId,post);
+        return new ResponseEntity<>(targetUser,HttpStatus.OK);
     }
 }
