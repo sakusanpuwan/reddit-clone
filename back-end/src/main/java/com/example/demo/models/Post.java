@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -27,7 +28,7 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "name")
-    @JsonIgnoreProperties({"posts"})
+    @JsonIgnoreProperties({"posts","users"})
     private SubReddit subReddit;
 
     @ManyToMany
@@ -36,7 +37,7 @@ public class Post {
             joinColumns = {@JoinColumn(name = "likedPost_id",nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "user_id",nullable = false)}
     )
-    @JsonIgnoreProperties("likedPosts")
+    @JsonIgnore
     private List<User> likedUsers;
 
     @ManyToOne

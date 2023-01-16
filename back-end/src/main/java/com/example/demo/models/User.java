@@ -33,7 +33,7 @@ public class User {
     private List<SubReddit> subReddits;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties({"user"})
+    @JsonIgnoreProperties({"user","likedUsers"})
     private List<Post> posts;
 
     @ManyToMany

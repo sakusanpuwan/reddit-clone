@@ -22,11 +22,11 @@ public class SubReddit {
             joinColumns = {@JoinColumn(name = "subReddit_id",nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "user_id",nullable = false)}
     )
-    @JsonIgnoreProperties({"subReddits"})
+    @JsonIgnoreProperties({"subReddits","posts","likedPosts"})
     private List<User> users;
 
     @OneToMany(mappedBy = "subReddit",cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties({"subReddit"})
+    @JsonIgnoreProperties({"subReddit","user","likedUsers"})
     private List<Post> posts;
 
 
